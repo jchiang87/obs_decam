@@ -208,12 +208,12 @@ datasets: {
     }
 
     processCcd_config: {
-        template:      "%(proposal)s/output/%(object)s/%(date)s/CONFIG-processCcd-%(visit)06d_%(side)s%(ccd)02d.py"
-        python:        "lsst.pipe.tasks.processCcdLsstSim.ProcessCcdLsstSimConfig"
+        template:      "config/processCcd.py"
+        python:        "lsst.pipe.tasks.processCcd.ProcessCcdConfig"
         persistable:   "Config"
         storage:       "ConfigStorage"
         tables:        raw
-        tables:        raw_skyTile
+#        tables:        raw_skyTile
     }
     processCcd_metadata: {
         template:      "%(proposal)s/output/%(object)s/%(date)s/MD-processCcd-%(visit)06d_%(side)s%(ccd)02d.boost"
@@ -221,7 +221,7 @@ datasets: {
         persistable:   "PropertySet"
         storage:       "BoostStorage"
         tables:        raw
-        tables:        raw_skyTile
+#        tables:        raw_skyTile
     }
 
     deepCoadd: {
@@ -252,5 +252,23 @@ datasets: {
         storage:       "PickleStorage"
         tables:        "raw"
     }
-
+#
+# Schemata added from SdssMapper.paf (b051fbe25f9)
+#
+    src_schema: {
+        template:      "schema/src.fits"
+        python:        "lsst.afw.table.SourceCatalog"
+        persistable:        "ignored"
+        storage:    "FitsCatalogStorage"
+        tables:        raw
+        tables:        raw_skyTile
+    }
+    icSrc_schema: {
+        template:      "schema/icSrc.fits"
+        python:        "lsst.afw.table.SourceCatalog"
+        persistable:        "ignored"
+        storage:    "FitsCatalogStorage"
+        tables:        raw
+        tables:        raw_skyTile
+    }
 }
